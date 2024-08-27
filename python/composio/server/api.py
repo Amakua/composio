@@ -135,6 +135,11 @@ def create_app() -> FastAPI:
             status_code=401,
         )
 
+    @app.get("/", response_model=APIResponse[str])
+    def read_root():
+        """Root endpoint."""
+        return APIResponse(data="Composio API is running")
+
     @app.get("/api", response_model=APIResponse[GetApiResponse])
     @with_exception_handling
     def _api() -> GetApiResponse:
